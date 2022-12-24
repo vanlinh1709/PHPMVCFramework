@@ -13,7 +13,6 @@ class Request
         }
          return substr($path, 0, $position);//return ra path khong co dau ? tro di
     }
-
     public function method()
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
@@ -26,7 +25,6 @@ class Request
     {
         return $this->method() === 'post';
     }
-
     public function getBody()
     {
         $body = [];

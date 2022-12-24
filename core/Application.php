@@ -8,7 +8,6 @@ class Application
     public static Application $app;
     public static string $ROOT_DIR;
     public Controller $controller;
-
     /**
      * @return Controller
      */

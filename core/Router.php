@@ -5,8 +5,8 @@ class Router
 {
     public Request $request;
     public Response $response;
+    //route: tuyen duong
     protected array $routes = [];
-
     /**
      * @param Request $request
      * @param Response $response
@@ -16,20 +16,21 @@ class Router
         $this->request = $request;
         $this->response = $response;
     }
-
+    //C/n: khởi tạo ten và cảnh quan của tuyến đường dạng get
     public function get($path, $callback) {
         $this->routes['get'][$path] = $callback;
     }
     public function post($path, $callback) {
         $this->routes['post'][$path] = $callback;
     }
-
     public function resolve()
     {
+        //lay ten duong nguoi dung yeu cau
         $path = $this->request->getPath();
         $method = $this->request->method();
+        //lay canh quan cua tuyen duong
         $callback = $this->routes[$method][$path] ?? false;
-        if ($callback === false) {
+        if ($callback === false) {//khong ton tai noi dung tuyen duong
             $this->response->setStatusCode(404);
             return $this->renderView('_404');
         }
@@ -46,11 +47,7 @@ class Router
         $viewContent = $this->renderOnlyView($view, $params);
         return str_replace('{{content}}', $viewContent, $layoutContent);
     }
-//    public function renderContent($viewContent)
-//    {
-//        $layoutContent = $this->layoutContent();
-//        return str_replace('{{content}}', $viewContent, $layoutContent);
-//    }
+
     public function layoutContent()
     {
         $layout = Application::$app->controller->layout;
@@ -59,7 +56,7 @@ class Router
         return ob_get_clean();
     }
 
-    protected function renderOnlyView($view, $params = [])
+    protected function renderOnlyView($view, $params)
     {
         foreach ($params as $key => $value ) {
             $$key = $value;
