@@ -22,6 +22,7 @@ abstract class Model
     public array $errors = [];
 
     abstract public function rules() :array;
+
     public function validate()
     {
         foreach ($this->rules() as $attribute => $rules) {
@@ -43,14 +44,13 @@ abstract class Model
                 if($ruleName === self::RULE_MAX && strlen($value) > $rule['max']) {
                     $this->addError($attribute, self::RULE_MAX, $rule);
                 }
+                if($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
+                    $this->addError($attribute, self::RULE_MATCH, $rule);
+                }
             }
-            echo $ruleName.'<br>';
+        };//end foreach
 
-        };
-        echo '<pre>';
-        var_dump($this->errors);
-        die();
-        return empty($this->errors);
+                return empty($this->errors);
     }
 
     public function addError(string $attribute, string $rule, $params = [])
@@ -71,5 +71,15 @@ abstract class Model
             self::RULE_MAX => 'Max length of this field must be {max}',
             self::RULE_MATCH => 'This field must be the same as {match}',
         ];
+    }
+
+    public function hasError($attribute)
+    {
+        return $this->errors[$attribute] ?? false;
+    }
+
+    public function getFirstError($attribute)
+    {
+        return $this->errors[$attribute][0] ?? false;
     }
 }

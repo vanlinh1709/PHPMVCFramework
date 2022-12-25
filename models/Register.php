@@ -4,7 +4,6 @@ use app\core\Model;
 
 class Register extends Model
 {
-
     public string $firstName;
     public string $lastName;
     public string $email;
