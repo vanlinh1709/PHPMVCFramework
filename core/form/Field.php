@@ -42,7 +42,6 @@ class Field
             $this->model->getFirstError($this->attribute)
         );//sprintf
     }
-
     public function passwordField()
     {
         $this->type = self::TYPE_PASSWORD;

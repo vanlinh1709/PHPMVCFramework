@@ -18,7 +18,6 @@ abstract class Model
             }
         }
     }
-
     public array $errors = [];
 
     abstract public function rules() :array;
