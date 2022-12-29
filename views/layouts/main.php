@@ -1,4 +1,5 @@
 <?php
+use \app\core\Application;
 ?>
 
 <!doctype html>
@@ -37,10 +38,14 @@
                 <a class="nav-link" href="/register">Register</a>
             </li>
         </ul>
-
     </div>
 </nav>
 <div class="container">
+    <?php if (Application::$app->session->getFlash('success')): ?>
+        <div class="alert alert-success">
+            <p><?php echo Application::$app->session->getFlash('success') ?></p>
+        </div>
+    <?php endif; ?>
     {{content}}
 </div>
 <!-- Optional JavaScript -->
