@@ -30,6 +30,7 @@ use \app\core\Application;
                 <a class="nav-link" href="/contact">Contact Us</a>
             </li>
         </ul>
+        <?php if (Application::$app->isGuest()): ?>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="/login">Login</a>
@@ -38,6 +39,15 @@ use \app\core\Application;
                 <a class="nav-link" href="/register">Register</a>
             </li>
         </ul>
+        <?php else: ?>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Welcome <?php echo Application::$app->user->getDisplayName() ?>
+                (Logout)
+                </a
+            </li>
+        </ul>
+        <?php endif;?>
     </div>
 </nav>
 <div class="container">
