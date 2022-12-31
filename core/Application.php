@@ -2,16 +2,18 @@
 namespace app\core;
 class Application
 {
+    public string $layout = 'main';
     public Router $router;
     public string $userClass;
     public Request $request;
     public Response $response;
     public Database $db;
     public ?DbModel $dbModel;
+    public View $view;
     public Session $session;
     public static Application $app;
     public static string $ROOT_DIR;
-    public Controller $controller;
+    public ?Controller $controller = null;
     /**
      * @return Controller
      */
@@ -37,7 +39,7 @@ class Application
         $this->router = new Router($this->request, $this->response);
         $this->session = new Session();
         $this->db = new Database($config['db']);
-
+        $this->view = new View();
         $primaryValue = $this->session->get('user');
         if ($primaryValue) {
             $primaryKey = $this->userClass::primaryKey();
@@ -47,7 +49,15 @@ class Application
         }
     }
     public function run() {
-        echo $this->router->resolve();
+
+        try {
+            echo $this->router->resolve();
+        } catch (\Exception $e) {
+            $this->response->setStatusCode($e->getCode());
+            echo $this->view->renderView('_error', [
+                'exception' => $e
+            ]);
+        }
     }
 
     public function login(DbModel $user)
@@ -65,7 +75,7 @@ class Application
         $this->session->remove('user');
     }
 
-    public function isGuest()
+    public static function isGuest()
     {
         return !self::$app->user;
     }

@@ -2,6 +2,8 @@
 
 namespace app\core;
 
+use app\core\Application;
+
 class Database
 {
     //errors: khong bat xampp khong dung duoc PDO
