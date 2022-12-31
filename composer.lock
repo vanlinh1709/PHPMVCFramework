@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "acb497c52781f17ec6d8ec200782d985",
+    "content-hash": "3dd5751ca3e51cdfe190c24add9a9506",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -70,19 +70,24 @@
         },
         {
             "name": "linhtv/php-mvc-core",
-            "version": "v1.0.2",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vanlinh1709/linhtv-php-mvc-core.git",
-                "reference": "c5f905066a9ef71968e945550ef2b501e12d1358"
+                "reference": "7cb82731b2c07ad8cf665bc462a885425386655e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vanlinh1709/linhtv-php-mvc-core/zipball/c5f905066a9ef71968e945550ef2b501e12d1358",
-                "reference": "c5f905066a9ef71968e945550ef2b501e12d1358",
+                "url": "https://api.github.com/repos/vanlinh1709/linhtv-php-mvc-core/zipball/7cb82731b2c07ad8cf665bc462a885425386655e",
+                "reference": "7cb82731b2c07ad8cf665bc462a885425386655e",
                 "shasum": ""
             },
             "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "linhtv\\phpmvc\\": "."
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
@@ -92,9 +97,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vanlinh1709/linhtv-php-mvc-core/issues",
-                "source": "https://github.com/vanlinh1709/linhtv-php-mvc-core/tree/v1.0.2"
+                "source": "https://github.com/vanlinh1709/linhtv-php-mvc-core/tree/v1.0.4"
             },
-            "time": "2022-12-31T21:44:17+00:00"
+            "time": "2022-12-31T22:11:44+00:00"
         },
         {
             "name": "phpoption/phpoption",
