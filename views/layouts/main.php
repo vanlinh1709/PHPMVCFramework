@@ -1,5 +1,5 @@
 <?php
-use \app\core\Application;
+use \linhtv\phpmvc\Application;
 ?>
 
 <!doctype html>

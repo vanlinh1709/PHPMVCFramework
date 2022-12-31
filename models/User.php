@@ -1,8 +1,8 @@
 <?php
 namespace app\models;
-use app\core\DbModel;
-use app\core\Model;
-use app\core\UserModel;
+use linhtv\phpmvc\DbModel;
+use linhtv\phpmvc\Model;
+use linhtv\phpmvc\UserModel;
 
 class User extends UserModel
 {

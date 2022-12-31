@@ -1,5 +1,5 @@
 <?php
-use app\core\Application;
+use linhtv\phpmvc\Application;
 use app\controllers\SiteController;
 use app\controllers\AuthController;
 

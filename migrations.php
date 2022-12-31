@@ -1,5 +1,5 @@
 <?php
-use app\core\Application;
+use linhtv\phpmvc\Application;
 
 require_once  __DIR__.'/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createMutable(__DIR__);

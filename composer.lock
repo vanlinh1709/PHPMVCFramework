@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "66a85b3ffcf44924fd87ac8f138719aa",
+    "content-hash": "acb497c52781f17ec6d8ec200782d985",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -67,6 +67,34 @@
                 }
             ],
             "time": "2022-07-30T15:56:11+00:00"
+        },
+        {
+            "name": "linhtv/php-mvc-core",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vanlinh1709/linhtv-php-mvc-core.git",
+                "reference": "c5f905066a9ef71968e945550ef2b501e12d1358"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vanlinh1709/linhtv-php-mvc-core/zipball/c5f905066a9ef71968e945550ef2b501e12d1358",
+                "reference": "c5f905066a9ef71968e945550ef2b501e12d1358",
+                "shasum": ""
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Linh Tv",
+                    "email": "linhtvph18589@fpt.edu.vn"
+                }
+            ],
+            "support": {
+                "issues": "https://github.com/vanlinh1709/linhtv-php-mvc-core/issues",
+                "source": "https://github.com/vanlinh1709/linhtv-php-mvc-core/tree/v1.0.2"
+            },
+            "time": "2022-12-31T21:44:17+00:00"
         },
         {
             "name": "phpoption/phpoption",

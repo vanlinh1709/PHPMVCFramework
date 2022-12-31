@@ -1,9 +1,9 @@
 <?php
 namespace app\controllers;
-use app\core\Application;
-use app\core\Controller;
-use app\core\Request;
-use app\core\Response;
+use linhtv\phpmvc\Application;
+use linhtv\phpmvc\Controller;
+use linhtv\phpmvc\Request;
+use linhtv\phpmvc\Response;
 use app\models\ContactForm;
 
 class SiteController extends Controller

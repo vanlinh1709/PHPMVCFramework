@@ -2,9 +2,9 @@
 
 namespace app\models;
 
-use app\core\Application;
-use app\core\DbModel;
-use app\core\Model;
+use linhtv\phpmvc\Application;
+use linhtv\phpmvc\DbModel;
+use linhtv\phpmvc\Model;
 
 class LoginForm extends Model
 {

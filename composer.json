@@ -6,6 +6,7 @@
         }
     },
     "require": {
-        "vlucas/phpdotenv": "^5.5"
+        "vlucas/phpdotenv": "^5.5",
+        "linhtv/php-mvc-core": "v1.0.2"
     }
 }
