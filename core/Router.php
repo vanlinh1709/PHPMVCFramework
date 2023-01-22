@@ -34,7 +34,7 @@ class Router
              return $this->renderOnlyView('_404');
          }
          Application::$app->setController($callback[0]);
-         return call_user_func($callback);
+         return call_user_func($callback, $this->request);
     }
 
     public function renderView($view, $params) {
