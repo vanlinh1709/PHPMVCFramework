@@ -10,7 +10,6 @@ class Field
     public Model $model;
     public string $attribute;
     public string $type;
-
     /**
      * @param Model $model
      * @param string $attribute
