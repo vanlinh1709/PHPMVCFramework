@@ -1,5 +1,4 @@
 <?php
-
 namespace app\core;
 
 class Database
@@ -18,8 +17,11 @@ class Database
     {
        $this->createMigrationsTable();
        $appliedMigrations = $this->getAppliedMigrations();
-
+       //trong $files sẽ lưu trữ tên các file trong thư mục migrations
+        //trong $files sẽ chứa 2 string là . và ..
+       $newMigrations = [];
        $files = scandir(Application::$ROOT_DIR.'/migrations');
+       //
        $toApplyMigrations = array_diff($files, $appliedMigrations);
         foreach ($toApplyMigrations as $migration) {
             if ($migration === '.' || $migration === '..') {
@@ -27,10 +29,30 @@ class Database
             }
             require_once Application::$ROOT_DIR."/migrations/$migration";
             $className = pathinfo($migration, PATHINFO_FILENAME);
-            var_dump($className);
+            $instance = new $className();
+            $this->log("Applying migrations $migration".PHP_EOL);
+            $instance->up();
+            $this->log("Applied migrations".PHP_EOL);
+            $newMigrations[] = $migration;
        }
+        if (!empty($newMigrations)) {
+            $this->saveMigrations($newMigrations);
+        } else {
+            $this->log("All migrations are applied");
+        }
+
     }
 
+    public function saveMigrations(array $migrations)//them ten file migration len migrations table
+    {
+        $str = implode(",", array_map(
+            fn($m) => "('$m')", $migrations
+        ));
+       $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES
+            $str
+                                       ");
+       $statement->execute();
+    }
     public function createMigrationsTable()
     {
         $this->pdo->exec("
@@ -48,5 +70,10 @@ class Database
         $statement->execute();
 
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
+    }
+
+    public function log($message)
+    {
+        echo '['. date('Y-m-d H:i:s') . '] - ' .$message .PHP_EOL;
     }
 }

@@ -1,9 +1,10 @@
 <?php
 namespace app\models;
 
+use app\core\DbModel;
 use app\core\Model;
 
-class Register extends Model
+class User extends DbModel
 {
     public string $firstname = '';
     public string $lastname = '';
@@ -11,6 +12,10 @@ class Register extends Model
     public string $password= '';
     public string $confirmPassword = '';
 
+    public function tableName(): string
+    {
+        return 'user';
+    }
     public function rules(): array
     {
         return [
