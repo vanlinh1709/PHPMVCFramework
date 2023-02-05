@@ -1,79 +1,47 @@
 <?php
+
 namespace app\core;
 
 class Database
 {
-    public \PDO $pdo;
-
-    public function __construct(array $config) {
+    public \PDO $pdo;//khai bao
+    public function __construct(array $config)
+    {
         $dsn = $config['dsn'];
         $user = $config['user'];
         $password = $config['password'];
-        $this->pdo =  new \PDO($dsn, $user, $password);
+        //connect database
+        $this->pdo = new \PDO($dsn, $user, $password);
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
-    public function applyMigrations()
+    public function applyMigrations() {
+        $this->createMigrationsTable();
+        //xac dinh duoc nhung file nao la can apply
+        $this->getAppliedMigrations();
+        $files = scandir('C:\xampp\htdocs\PHPMVCFramework\migrations');
+        echo '<pre>';
+        var_dump($files);
+        echo '</pre>';
+        exit();
+    }
+    protected function createMigrationsTable()
     {
-       $this->createMigrationsTable();
-       $appliedMigrations = $this->getAppliedMigrations();
-       //trong $files sẽ lưu trữ tên các file trong thư mục migrations
-        //trong $files sẽ chứa 2 string là . và ..
-       $newMigrations = [];
-       $files = scandir(Application::$ROOT_DIR.'/migrations');
-       //
-       $toApplyMigrations = array_diff($files, $appliedMigrations);
-        foreach ($toApplyMigrations as $migration) {
-            if ($migration === '.' || $migration === '..') {
-                continue;
-            }
-            require_once Application::$ROOT_DIR."/migrations/$migration";
-            $className = pathinfo($migration, PATHINFO_FILENAME);
-            $instance = new $className();
-            $this->log("Applying migrations $migration".PHP_EOL);
-            $instance->up();
-            $this->log("Applied migrations".PHP_EOL);
-            $newMigrations[] = $migration;
-       }
-        if (!empty($newMigrations)) {
-            $this->saveMigrations($newMigrations);
-        } else {
-            $this->log("All migrations are applied");
-        }
-
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            migration VARCHAR(255),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )  ENGINE=INNODB;");
+    }
+    public function  appliedMigrations() {
+      //return nhung file migrations da duoc up len database
     }
 
-    public function saveMigrations(array $migrations)//them ten file migration len migrations table
-    {
-        $str = implode(",", array_map(
-            fn($m) => "('$m')", $migrations
-        ));
-       $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES
-            $str
-                                       ");
-       $statement->execute();
-    }
-    public function createMigrationsTable()
-    {
-        $this->pdo->exec("
-            CREATE TABLE IF NOT EXISTS migrations (
-                id INT AUTO_INCREMENT PRIMARY KEY,
-                migration VARCHAR(255),
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            ) ENGINE=INNODB
-        ");
-    }
-
-    public function getAppliedMigrations()
+    private function getAppliedMigrations()
     {
         $statement = $this->pdo->prepare("SELECT migration FROM migrations");
         $statement->execute();
 
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
-    }
-
-    public function log($message)
-    {
-        echo '['. date('Y-m-d H:i:s') . '] - ' .$message .PHP_EOL;
     }
 }

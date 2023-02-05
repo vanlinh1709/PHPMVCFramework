@@ -1,10 +1,8 @@
 <?php
 namespace app\models;
-
-use app\core\DbModel;
 use app\core\Model;
 
-class User extends DbModel
+class User extends Model
 {
     public string $firstname = '';
     public string $lastname = '';

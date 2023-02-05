@@ -7,7 +7,6 @@ class Application
     public static string $ROOT_DIR;
     public Router $router;
     public Request $request;
-    public Database $db;
     public static Application $app;
     public Controller $controller;
     /**
@@ -29,7 +28,6 @@ class Application
     {
         $this->request = new Request();
         $this->router = new Router($this->request);
-        $this->db = new Database($config['db']);
         self::$ROOT_DIR = $rootDir;
         self::$app = $this;
     }
